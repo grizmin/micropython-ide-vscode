@@ -154,13 +154,14 @@ export default class Project extends Base {
           }
           break;
       }
-
+      
       if (!selectedPort || !selectedPort.length) {
         this.statusDone();
         return;
       }
-
-      if (!fs.existsSync(selectedPort)) {
+      
+      var x = this.getUserPlatform();
+      if (!fs.existsSync(selectedPort) && x != 'win32') {
         vscode.window.showErrorMessage("Port does not exist, please connect device and try again!");
         this.statusDone();
         return;
